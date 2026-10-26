@@ -7,6 +7,7 @@
     <style>
         * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             margin: 0;
@@ -37,12 +38,6 @@
             color: #4a4a4a;
             position: relative;
             z-index: 10;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         h1 {
@@ -66,20 +61,13 @@
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
-            transition: transform 0.2s, background-color 0.2s;
             font-weight: bold;
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-            background-color: #c2185b;
         }
 
         .hidden {
             display: none !important;
         }
 
-        /* Passcode Input Style */
         .pass-input {
             width: 80%;
             padding: 10px;
@@ -93,7 +81,6 @@
             letter-spacing: 4px;
         }
 
-        /* 9 Flower Options Grid */
         .flower-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -108,12 +95,6 @@
             padding: 12px 5px;
             font-size: 2.2rem;
             cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .flower-option:hover {
-            transform: scale(1.1);
-            background: #ffd1dc;
         }
 
         .flower-name {
@@ -123,7 +104,7 @@
             font-weight: bold;
         }
 
-        /* Floating Hearts Game Area */
+        /* Pinalaking game area at mas malalaking puso para madaling mahuli */
         .game-area {
             position: fixed;
             top: 0;
@@ -136,20 +117,24 @@
 
         .floating-heart {
             position: absolute;
-            font-size: 45px;
+            font-size: 65px; /* Mas malaki na puso */
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             pointer-events: auto;
-            animation: floatUp 3.2s linear infinite;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            animation: floatSlow 4.5s linear infinite; /* Mas mabagal na paglipad */
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+            user-select: none;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(105vh) scale(0.8); opacity: 1; }
-            50% { transform: translateY(50vh) scale(1.1); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(0.8); opacity: 0; }
+        @keyframes floatSlow {
+            0% { transform: translateY(105vh) scale(0.9); opacity: 1; }
+            100% { transform: translateY(-15vh) scale(1.1); opacity: 0; }
         }
 
-        /* Surprise Letter Note Box */
         .secret-note {
             background: #fff0f5;
             border: 2px dashed #ff4081;
@@ -166,7 +151,7 @@
 
     <div class="game-area" id="game-area"></div>
 
-    <!-- LEVEL 1: PASSCODE TWIST WITH CLUE -->
+    <!-- LEVEL 1: PASSCODE -->
     <div class="container" id="step-1">
         <h1>For You Mahal Ko ✨</h1>
         <p>I love you always! Bago ka makapasok, ilagay ang secret password:<br><strong>(Clue: Birthday mo + Birthday ko)</strong></p>
@@ -176,139 +161,11 @@
         <p id="pass-error" style="color: red; font-size: 0.85rem; display: none; margin-top: 8px;">Maling Passcode! Subukan ulit. ❤️</p>
     </div>
 
-    <!-- LEVEL 2: HEART CATCHER GAME TWIST -->
+    <!-- LEVEL 2: HEART CATCHER (5 HEARTS, SLOW & BIG) -->
     <div class="container hidden" id="step-2">
         <h1>Hulihin Mo Sila! 💖</h1>
-        <p>Hulihin ang <strong>7 lumilipad na pink hearts</strong> sa screen bago maubos ang oras!</p>
+        <p>I-tap ang <strong>5 malalaking pink hearts</strong> sa screen bago maubos ang oras!</p>
         <p style="font-weight: bold; color: #d81b60; font-size: 1.1rem; margin-bottom: 5px;">
-            Oras: <span id="timer">15</span>s | Nahuli: <span id="score">0</span> / 7
+            Oras: <span id="timer">25</span>s | Nahuli: <span id="score">0</span> / 5
         </p>
-    </div>
-
-    <!-- LEVEL 3: SECRET LOVE LETTER REVEAL TWIST -->
-    <div class="container hidden" id="step-3">
-        <h1>Special Note For You 💌</h1>
-        <div class="secret-note">
-            "Salamat sa lahat ng saya, lambing, at pagmamahal. Ikaw ang pinakamagandang regalo sa buhay ko araw-araw!"
-        </div>
-        <p>Ready ka na bang pumili ng bulaklak mo ngayon?</p>
-        <button class="btn" onclick="goToFlowerSelection()">Pumili ng Bulaklak 🌸</button>
-    </div>
-
-    <!-- LEVEL 4: 9 FLOWER SELECTION -->
-    <div class="container hidden" id="step-4">
-        <h1>Pili Ka Ng Bulaklak Mo 🌸</h1>
-        <p>Anong gusto mong bulaklak ngayon, mahal ko?</p>
-        <div class="flower-grid">
-            <div class="flower-option" onclick="selectFlower('🌹 Red Rose', 'Ikaw ang pinakamagandang rosas sa buhay ko!')">🌹<div class="flower-name">Rose</div></div>
-            <div class="flower-option" onclick="selectFlower('🌻 Sunflower', 'Ikaw ang nagbibigay-liwanag sa araw ko!')">🌻<div class="flower-name">Sunflower</div></div>
-            <div class="flower-option" onclick="selectFlower('🌷 Pink Tulip', 'Ikaw ang nagpapatibok ng puso ko araw-araw!')">🌷<div class="flower-name">Tulip</div></div>
-            <div class="flower-option" onclick="selectFlower('💐 Bouquet', 'Lahat ng ganda sa mundo, nasa\'yo na!')">💐<div class="flower-name">Bouquet</div></div>
-            <div class="flower-option" onclick="selectFlower('🌼 Daisy', 'Ang ngiti mo ang nagpapaganda ng araw ko!')">🌼<div class="flower-name">Daisy</div></div>
-            <div class="flower-option" onclick="selectFlower('🪷 Lotus', 'Napakaespesyal mo at nag-iisa sa puso ko!')">🪷<div class="flower-name">Lotus</div></div>
-            <div class="flower-option" onclick="selectFlower('🌺 Hibiscus', 'Ang ganda mo ay walang kapantay!')">🌺<div class="flower-name">Hibiscus</div></div>
-            <div class="flower-option" onclick="selectFlower('🌸 Cherry Blossom', 'Masaya ako kapag kasama kita palagi!')">🌸<div class="flower-name">Blossom</div></div>
-            <div class="flower-option" onclick="selectFlower('🌾 Lavender', 'Nagbibigay ka ng kapayapaan sa puso ko!')">🌾<div class="flower-name">Lavender</div></div>
-        </div>
-    </div>
-
-    <!-- LEVEL 5: FINAL SURPRISE RESULT -->
-    <div class="container hidden" id="step-5">
-        <h1 id="selected-flower-title">🎁 Surpresa Para sa'yo!</h1>
-        <div id="flower-display" style="font-size: 4.5rem; margin: 15px 0;"></div>
-        <p id="flower-message" style="font-style: italic; font-weight: bold; color: #d81b60; font-size: 1.1rem;"></p>
-        <p>I love you always, at ikaw lang ang nag-iisa kong mahal!</p>
-        <button class="btn" onclick="resetApp()">Ulitin Natin 💌</button>
-    </div>
-
-    <script>
-        let score = 0;
-        let timeLeft = 15;
-        let heartInterval;
-        let timerInterval;
-
-        function checkPasscode() {
-            const code = document.getElementById('passcode').value;
-            const correctPasscode = '1922'; 
-
-            if (code === correctPasscode) {
-                document.getElementById('pass-error').style.display = 'none';
-                document.getElementById('step-1').classList.add('hidden');
-                document.getElementById('step-2').classList.remove('hidden');
-                startMiniGame();
-            } else {
-                document.getElementById('pass-error').style.display = 'block';
-            }
-        }
-
-        function startMiniGame() {
-            score = 0;
-            timeLeft = 15;
-            document.getElementById('score').innerText = score;
-            document.getElementById('timer').innerText = timeLeft;
-
-            heartInterval = setInterval(spawnHeart, 900);
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timer').innerText = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    clearInterval(heartInterval);
-                    if (score < 7) {
-                        alert('Naubusan ka ng oras! Subukan natin ulit habulin ang mga puso. ❤️');
-                        startMiniGame();
-                    }
-                }
-            }, 1000);
-        }
-
-        function spawnHeart() {
-            if (score >= 7) return;
-            const gameArea = document.getElementById('game-area');
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = '💖';
-            heart.style.left = Math.random() * 75 + 'vw';
-            
-            heart.onclick = function() {
-                score++;
-                document.getElementById('score').innerText = score;
-                if (navigator.vibrate) navigator.vibrate(50);
-                heart.remove();
-
-                if (score >= 7) {
-                    clearInterval(heartInterval);
-                    clearInterval(timerInterval);
-                    document.querySelectorAll('.floating-heart').forEach(h => h.remove());
-                    setTimeout(() => {
-                        document.getElementById('step-2').classList.add('hidden');
-                        document.getElementById('step-3').classList.remove('hidden');
-                    }, 400);
-                }
-            };
-
-            gameArea.appendChild(heart);
-            setTimeout(() => { if(heart.parentElement) heart.remove(); }, 3200);
-        }
-
-        function goToFlowerSelection() {
-            document.getElementById('step-3').classList.add('hidden');
-            document.getElementById('step-4').classList.remove('hidden');
-        }
-
-        function selectFlower(flowerName, message) {
-            document.getElementById('step-4').classList.add('hidden');
-            document.getElementById('step-5').classList.remove('hidden');
-            document.getElementById('selected-flower-title').innerText = flowerName;
-            document.getElementById('flower-display').innerText = flowerName.split(' ')[0];
-            document.getElementById('flower-message').innerText = `"${message}"`;
-        }
-
-        function resetApp() {
-            document.getElementById('step-5').classList.add('hidden');
-            document.getElementById('step-1').classList.remove('hidden');
-            document.getElementById('passcode').value = '';
-        }
-    </script>
-</body>
-</html>
+    
