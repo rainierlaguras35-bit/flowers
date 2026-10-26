@@ -133,6 +133,14 @@
             animation: floatSlow 4.5s linear infinite;
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
             user-select: none;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        /* Animation kapag na-tap ang puso (bibiyak/mag-i-split at liliit) */
+        .heart-break {
+            transform: scale(1.4) rotate(15deg);
+            opacity: 0;
+            filter: drop-shadow(0 0 15px #ff4081);
         }
 
         @keyframes floatSlow {
@@ -169,7 +177,7 @@
     <!-- LEVEL 2: HEART CATCHER (5 HEARTS, SLOW & BIG) -->
     <div class="container hidden" id="step-2">
         <h1>get them baby</h1>
-        <p>tap mo yung<strong>5 pink hearts</strong> bago maubos ang oras baby!</p>
+        <p>tap mo yung<strong> 5 pink hearts</strong> bago maubos ang oras baby!</p>
         <p style="font-weight: bold; color: #d81b60; font-size: 1.1rem; margin-bottom: 5px;">
             Oras: <span id="timer">25</span>s | Nahuli: <span id="score">0</span> / 5
         </p>
@@ -267,10 +275,19 @@
             
             const handleTouch = function(e) {
                 e.preventDefault();
+                
+                // Huwag hayaang ma-tap nang paulit-ulit ang parehong puso habang nag-a-animate
+                if (heart.classList.contains('heart-break')) return;
+
                 score++;
                 document.getElementById('score').innerText = score;
                 if (navigator.vibrate) navigator.vibrate(60);
-                heart.remove();
+
+                // Mag-a-apply ng break effect bago mawala
+                heart.classList.add('heart-break');
+                setTimeout(() => {
+                    heart.remove();
+                }, 250);
 
                 if (score >= 5) {
                     clearInterval(heartInterval);
@@ -279,7 +296,7 @@
                     setTimeout(() => {
                         document.getElementById('step-2').classList.add('hidden');
                         document.getElementById('step-3').classList.remove('hidden');
-                    }, 300);
+                    }, 400);
                 }
             };
 
