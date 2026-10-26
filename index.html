@@ -21,32 +21,28 @@
             min-height: 100vh;
             text-align: center;
             color: #fff;
-            overflow: hidden;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.92);
-            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 20px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             max-width: 85%;
-            width: 340px;
-            backdrop-filter: blur(8px);
+            width: 320px;
             color: #4a4a4a;
-            position: relative;
-            z-index: 10;
         }
 
         h1 {
             color: #d81b60;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 10px;
         }
 
         p {
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
         }
 
         .btn {
@@ -59,7 +55,6 @@
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
             transition: transform 0.2s, background-color 0.2s;
-            margin: 5px;
         }
 
         .btn:active {
@@ -93,35 +88,29 @@
             background: #ffd1dc;
         }
 
-        /* Mas pinagandang taguan ng puso para sigurado makita */
-        .game-area {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .floating-heart {
-            position: absolute;
-            font-size: 35px;
+        /* Malaki, kulay pink, at mabagal/madaling i-tap na puso */
+        .heart-target-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 110px;
+            background: #ffe6f0;
+            border: 2px dashed #ff4081;
+            border-radius: 15px;
+            margin-top: 15px;
             cursor: pointer;
-            pointer-events: auto;
-            animation: floatUp 2.5s linear infinite;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+            font-size: 4.5rem;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+            animation: pulseHeart 1.5s infinite alternate;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(105vh) scale(0.8); opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        @keyframes pulseHeart {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
         }
     </style>
 </head>
 <body>
-
-    <div class="game-area" id="game-area"></div>
 
     <div class="container" id="step-1">
         <h1>For you Mahal ko ✨</h1>
@@ -131,8 +120,10 @@
 
     <div class="container hidden" id="step-2">
         <h1>Hulihin Mo Sila! 💖</h1>
-        <p>I-tap ang 5 na lumilipad na puso sa screen para mabuksan ang hardin ng mga bulaklak!</p>
-        <p style="font-weight: bold; color: #e91e63; font-size: 1.2rem;">Mga pusong nahuli: <span id="score">0</span> / 5</p>
+        <p>I-tap ang malaking pink na puso ng <strong>5 beses</strong> para mabuksan ang hardin ng mga bulaklak!</p>
+        <p style="font-weight: bold; color: #e91e63; font-size: 1.1rem; margin-bottom: 5px;">Pusong nasalo: <span id="score">0</span> / 5</p>
+        
+        <div class="heart-target-box" id="click-heart" onclick="tapHeart()">💖</div>
     </div>
 
     <div class="container hidden" id="step-3">
@@ -156,39 +147,26 @@
 
     <script>
         let score = 0;
-        let heartInterval;
 
         function startMiniGame() {
             document.getElementById('step-1').classList.add('hidden');
             document.getElementById('step-2').classList.remove('hidden');
             score = 0;
             document.getElementById('score').innerText = score;
-            heartInterval = setInterval(spawnHeart, 500);
         }
 
-        function spawnHeart() {
-            if (score >= 5) return;
-            const gameArea = document.getElementById('game-area');
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = '❤️';
+        function tapHeart() {
+            score++;
+            document.getElementById('score').innerText = score;
             
-            // Random horizontal position
-            heart.style.left = Math.random() * 85 + 'vw';
-            
-            heart.onclick = function() {
-                score++;
-                document.getElementById('score').innerText = score;
-                heart.remove();
-                if (score >= 5) {
-                    clearInterval(heartInterval);
-                    document.querySelectorAll('.floating-heart').forEach(h => h.remove());
-                    setTimeout(goToFlowerSelection, 400);
-                }
-            };
+            // Konting animation kapag na-tap
+            const heartBox = document.getElementById('click-heart');
+            heartBox.style.transform = 'scale(0.85)';
+            setTimeout(() => { heartBox.style.transform = 'scale(1)'; }, 150);
 
-            gameArea.appendChild(heart);
-            setTimeout(() => { if(heart.parentElement) heart.remove(); }, 2500);
+            if (score >= 5) {
+                setTimeout(goToFlowerSelection, 400);
+            }
         }
 
         function goToFlowerSelection() {
