@@ -36,7 +36,7 @@
 
         p {
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.5;
             margin-bottom: 25px;
         }
 
@@ -74,39 +74,28 @@
 <body>
 
     <div class="container">
-        <h1>For Someone Special ✨</h1>
-        <p>Tap the button below to pick fresh flowers just for you!</p>
+        <h1>For you Mahal ko ✨</h1>
+        <p>I love you always! Tap the button below to pick fresh flowers just for you! ❤️</p>
         
-        <button class="flower-btn" onclick="bloomFlower()">Give Me A Flower 🌸</button>
+        <button class="flower-btn" onclick="pickFlower()">Give Me A Flower 🌸</button>
         
-        <div id="flowerArea" class="flower-display">🌸</div>
-        <p id="messageArea" style="font-weight: 600; color: #d81b60; margin-top: 15px;"></p>
+        <div class="flower-display" id="flower">🌸</div>
     </div>
 
     <script>
-        const flowers = [
-            { icon: "🌹", text: "A red rose for love!" },
-            { icon: "🌷", text: "A tulip for happiness!" },
-            { icon: "🌻", text: "A sunflower to brighten your day!" },
-            { icon: "🌺", text: "A hibiscus for beauty!" },
-            { icon: "🌸", text: "A cherry blossom just because you're special!" },
-            { icon: "💐", text: "A whole bouquet for you!" }
-        ];
-
-        function bloomFlower() {
+        const flowers = ['🌸', '🌺', '🌻', '🌹', '🌷', '💐', '🌼', '🪷'];
+        
+        function pickFlower() {
             const randomIndex = Math.floor(Math.random() * flowers.length);
-            const selected = flowers[randomIndex];
+            const flowerElement = document.getElementById('flower');
+            flowerElement.innerText = flowers[randomIndex];
             
-            const flowerArea = document.getElementById("flowerArea");
-            const messageArea = document.getElementById("messageArea");
-            
-            flowerArea.innerHTML = selected.icon;
-            messageArea.innerText = selected.text;
-            
-            flowerArea.style.animation = 'none';
-            flowerArea.offsetHeight; 
-            flowerArea.style.animation = null; 
+            // Re-trigger animation
+            flowerElement.style.animation = 'none';
+            flowerElement.offsetHeight; /* trigger reflow */
+            flowerElement.style.animation = 'popIn 0.3s ease-out';
         }
     </script>
+
 </body>
 </html>
