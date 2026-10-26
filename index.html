@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You Mahal Ko 🌸</title>
+    <title>Flowes for you</title>
     <style>
         * {
             box-sizing: border-box;
@@ -152,17 +152,17 @@
 
     <!-- LEVEL 1: PASSCODE -->
     <div class="container" id="step-1">
-        <h1>For You Mahal Ko ✨</h1>
-        <p>I love you always! Bago ka makapasok, ilagay ang secret password:<br><strong>(Clue: Birthday mo + Birthday ko)</strong></p>
+        <h1>Flowers for you✨</h1>
+        <p>I love you always baby ko<br><strong>(Birthday mo + Birthday ko)</strong></p>
         <input type="text" id="passcode" class="pass-input" placeholder="****" maxlength="4">
         <br>
         <button class="btn" onclick="checkPasscode()">Unlock Surprise 🔓</button>
-        <p id="pass-error" style="color: red; font-size: 0.9rem; font-weight: bold; display: none; margin-top: 10px;">Maling password, mahal ko! Try again ❤️</p>
+        <p id="pass-error" style="color: red; font-size: 0.9rem; font-weight: bold; display: none; margin-top: 10px;">Mali ka po baby, Try again.</p>
     </div>
 
     <!-- LEVEL 2: HEART CATCHER (5 HEARTS, SLOW & BIG) -->
     <div class="container hidden" id="step-2">
-        <h1>Hulihin Mo Sila! 💖</h1>
+        <h1>get them baby</h1>
         <p>I-tap ang <strong>5 malalaking pink hearts</strong> sa screen bago maubos ang oras!</p>
         <p style="font-weight: bold; color: #d81b60; font-size: 1.1rem; margin-bottom: 5px;">
             Oras: <span id="timer">25</span>s | Nahuli: <span id="score">0</span> / 5
@@ -171,28 +171,28 @@
 
     <!-- LEVEL 3: SECRET NOTE -->
     <div class="container hidden" id="step-3">
-        <h1>Special Note For You 💌</h1>
+        <h1>Message for you</h1>
         <div class="secret-note">
-            "Salamat sa lahat ng saya, lambing, at pagmamahal. Ikaw ang pinakamagandang regalo sa buhay ko araw-araw!"
+            "Thankyouu for everything baby, sobrang grateful ko na dumating ka sa buhay ko, mahal na mahal kita<33"
         </div>
-        <p>Ready ka na bang pumili ng bulaklak mo ngayon?</p>
-        <button class="btn" onclick="goToFlowerSelection()">Pumili ng Bulaklak 🌸</button>
+        <p>Pick Your Flowers Baby</p>
+        <button class="btn" onclick="goToFlowerSelection()">Pick Your Flowers Baby</button>
     </div>
 
     <!-- LEVEL 4: 9 FLOWERS -->
     <div class="container hidden" id="step-4">
-        <h1>Pili Ka Ng Bulaklak Mo 🌸</h1>
-        <p>Anong gusto mong bulaklak ngayon, mahal ko?</p>
+        <h1>Pick Your Flowers Baby</h1>
+        <p>What Flowers Do You Want baby ko?</p>
         <div class="flower-grid">
-            <div class="flower-option" onclick="selectFlower('🌹 Red Rose', 'Ikaw ang pinakamagandang rosas sa buhay ko!')">🌹<div class="flower-name">Rose</div></div>
-            <div class="flower-option" onclick="selectFlower('🌻 Sunflower', 'Ikaw ang nagbibigay-liwanag sa araw ko!')">🌻<div class="flower-name">Sunflower</div></div>
-            <div class="flower-option" onclick="selectFlower('🌷 Pink Tulip', 'Ikaw ang nagpapatibok ng puso ko araw-araw!')">🌷<div class="flower-name">Tulip</div></div>
-            <div class="flower-option" onclick="selectFlower('💐 Bouquet', 'Lahat ng ganda sa mundo, nasa\'yo na!')">💐<div class="flower-name">Bouquet</div></div>
-            <div class="flower-option" onclick="selectFlower('🌼 Daisy', 'Ang ngiti mo ang nagpapaganda ng araw ko!')">🌼<div class="flower-name">Daisy</div></div>
-            <div class="flower-option" onclick="selectFlower('🪷 Lotus', 'Napakaespesyal mo at nag-iisa sa puso ko!')">🪷<div class="flower-name">Lotus</div></div>
-            <div class="flower-option" onclick="selectFlower('🌺 Hibiscus', 'Ang ganda mo ay walang kapantay!')">🌺<div class="flower-name">Hibiscus</div></div>
-            <div class="flower-option" onclick="selectFlower('🌸 Cherry Blossom', 'Masaya ako kapag kasama kita palagi!')">🌸<div class="flower-name">Blossom</div></div>
-            <div class="flower-option" onclick="selectFlower('🌾 Lavender', 'Nagbibigay ka ng kapayapaan sa puso ko!')">🌾<div class="flower-name">Lavender</div></div>
+            <div class="flower-option" onclick="selectFlower('🌹 Red Rose', 'A rose by any other name would smell as sweet. - William Shakespeare!')">🌹<div class="flower-name">Rose</div></div>
+            <div class="flower-option" onclick="selectFlower('🌻 Sunflower', 'Keep your face to the sunshine and you cannot see the shadow. It's what sunflowers do.- helen Keller!')">🌻<div class="flower-name">Sunflower</div></div>
+            <div class="flower-option" onclick="selectFlower('🌷 Pink Tulip', 'The tulip is like a conversation among flowers. - Barbara Walters')">🌷<div class="flower-name">Tulip</div></div>
+            <div class="flower-option" onclick="selectFlower('💐 Bouquet', 'Always keep that happy attitude. Pretend that you are holding a beautiful fragrant bouquet. - Earl Nightingale!')">💐<div class="flower-name">Bouquet</div></div>
+            <div class="flower-option" onclick="selectFlower('🌼 Daisy', 'Where flowers bloom so does hope.- Lady Bird Johnson')">🌼<div class="flower-name">Daisy</div></div>
+            <div class="flower-option" onclick="selectFlower('🪷 Lotus', 'The lotus flower blooms most beautifully from the deepest and thickest mud. - Buddhist Proverb!')">🪷<div class="flower-name">Lotus</div></div>
+            <div class="flower-option" onclick="selectFlower('🌺 Hibiscus', ' Let your soul bloom like a hibiscus – quiet but unforgettable. - Hasina Begum!')">🌺<div class="flower-name">Hibiscus</div></div>
+            <div class="flower-option" onclick="selectFlower('🌸 Cherry Blossom', 'Under the cherry blossoms, none are strangers. - Kobayashi Issa!')">🌸<div class="flower-name">Blossom</div></div>
+            <div class="flower-option" onclick="selectFlower('🌾 Lavender', 'Peace blooms where lavender grows. - Unknown!')">🌾<div class="flower-name">Lavender</div></div>
         </div>
     </div>
 
@@ -214,7 +214,7 @@
         function checkPasscode() {
             // Binago ko ang input type sa text para mas siguradong mabasa ng maayos sa mobile phones
             const code = document.getElementById('passcode').value.trim();
-            const correctPasscode = '1922'; 
+            const correctPasscode = '1922'; - 
 
             if (code === correctPasscode) {
                 document.getElementById('pass-error').style.display = 'none';
