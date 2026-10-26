@@ -169,7 +169,7 @@
     <!-- LEVEL 1: PASSCODE TWIST WITH CLUE -->
     <div class="container" id="step-1">
         <h1>For You Mahal Ko ✨</h1>
-        <p>I love you always! Bago ka makapasok, ilagay ang secret password:<br><strong>(Clue: Birthday ko + Birthday mo, halimbawa: 0525)</strong></p>
+        <p>I love you always! Bago ka makapasok, ilagay ang secret password:<br><strong>(Clue: Birthday mo + Birthday ko)</strong></p>
         <input type="password" id="passcode" class="pass-input" placeholder="****" maxlength="4">
         <br>
         <button class="btn" onclick="checkPasscode()">Unlock Surprise 🔓</button>
@@ -229,8 +229,7 @@
 
         function checkPasscode() {
             const code = document.getElementById('passcode').value;
-            // 💡 PALITAN MO ANG '1234' NG EKSAKTONG BDAY MO + BDAY KO (Halimbawa: kung bday mo ay Oct 1 at sa kanya ay Oct 2, pwede mong gawing '1001')
-            const correctPasscode = '1234'; 
+            const correctPasscode = '1922'; 
 
             if (code === correctPasscode) {
                 document.getElementById('pass-error').style.display = 'none';
