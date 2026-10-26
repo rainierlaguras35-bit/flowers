@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowes for you</title>
+    <title>Flowes for you baby ko</title>
     <style>
         * {
             box-sizing: border-box;
@@ -62,6 +62,12 @@
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
             font-weight: bold;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .btn-secondary {
+            background-color: #f06292;
         }
 
         .hidden {
@@ -152,7 +158,7 @@
 
     <!-- LEVEL 1: PASSCODE -->
     <div class="container" id="step-1">
-        <h1>Flowers for you</h1>
+        <h1>Flowers for you baby ko</h1>
         <p>I love you always baby ko<br><strong>(Birthday mo + Birthday ko)</strong></p>
         <input type="text" id="passcode" class="pass-input" placeholder="****" maxlength="4">
         <br>
@@ -163,7 +169,7 @@
     <!-- LEVEL 2: HEART CATCHER (5 HEARTS, SLOW & BIG) -->
     <div class="container hidden" id="step-2">
         <h1>get them baby</h1>
-        <p>I-tap ang <strong>5 malalaking pink hearts</strong> sa screen bago maubos ang oras!</p>
+        <p>tap mo yung<strong>5 pink hearts</strong> bago maubos ang oras baby!</p>
         <p style="font-weight: bold; color: #d81b60; font-size: 1.1rem; margin-bottom: 5px;">
             Oras: <span id="timer">25</span>s | Nahuli: <span id="score">0</span> / 5
         </p>
@@ -175,8 +181,8 @@
         <div class="secret-note">
             "Thankyouu for everything baby, sobrang grateful ko na dumating ka sa buhay ko, mahal na mahal kita<33"
         </div>
-        <p>Pick Your Flowers Baby</p>
-        <button class="btn" onclick="goToFlowerSelection()">Pick Your Flowers Baby</button>
+        <p>I love you and baby ko</p>
+        <button class="btn" onclick="goToFlowerSelection()">Next po baby</button>
     </div>
 
     <!-- LEVEL 4: 9 FLOWERS -->
@@ -198,11 +204,15 @@
 
     <!-- LEVEL 5: RESULT -->
     <div class="container hidden" id="step-5">
-        <h1 id="selected-flower-title">🎁 Surpresa Para sa'yo!</h1>
+        <h1 id="selected-flower-title"> Surpresa Para sa'yo!</h1>
         <div id="flower-display" style="font-size: 4.5rem; margin: 15px 0;"></div>
         <p id="flower-message" style="font-style: italic; font-weight: bold; color: #d81b60; font-size: 1.1rem;"></p>
-        <p>I love you always, at ikaw lang ang nag-iisa kong mahal!</p>
-        <button class="btn" onclick="resetApp()">Ulitin Natin 💌</button>
+        <p>I love you always baby ko<33!</p>
+        
+        <!-- Back Button para makita ulit ang lahat ng flowers -->
+        <button class="btn" onclick="backToFlowers()">← Back </button>
+        <!-- Want to try again button para bumalik sa simula -->
+        <button class="btn btn-secondary" onclick="resetApp()">Want to try again? </button>
     </div>
 
     <script>
@@ -213,7 +223,7 @@
 
         function checkPasscode() {
             const code = document.getElementById('passcode').value.trim();
-            const correctPasscode = '1922'; // Naalis na ang maling dash dito
+            const correctPasscode = '1922'; 
 
             if (code === correctPasscode) {
                 document.getElementById('pass-error').style.display = 'none';
@@ -291,6 +301,11 @@
             document.getElementById('selected-flower-title').innerText = flowerName;
             document.getElementById('flower-display').innerText = flowerName.split(' ')[0];
             document.getElementById('flower-message').innerText = `"${message}"`;
+        }
+
+        function backToFlowers() {
+            document.getElementById('step-5').classList.add('hidden');
+            document.getElementById('step-4').classList.remove('hidden');
         }
 
         function resetApp() {
